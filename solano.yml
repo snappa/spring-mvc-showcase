@@ -5,7 +5,7 @@ cache:
   key_paths:
     - pom.xml
   save_paths:
-    - HOME/.m2/repository
+    - HOME/.m2
 tests:
   - type: junit
     command: mvn test
