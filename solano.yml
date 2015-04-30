@@ -1,8 +1,20 @@
+ruby_version: 2.1.5
+
 java:
   java_version: java-7-openjdk
-  maven_version: '3.0.5'  # 2.0, 3.0, 3.1, and 3.2
+  maven_version: '3.2'
 tests:
-  - type: junit
-    command: mvn test
-    report_files:
-    - "target/surefire-reports/*.xml"
+  - "mvn clean verify test -P all-tests"
+
+environment:
+  SOLANO_DW_HOSTNAME: solano-dw-poc.herokuapp.com
+  DW_API_AUTH_ID: 09baac47fb0bcd92
+  DW_API_AUTH_SECRET: muZxCjpD4y6rHSO_oK2ysh5bXIOmukqGWqIKnLs2S30
+  DW_API_TOKEN: 79f4beb4ae6fb9c4
+
+hooks:
+  pre_setup: "bundle install && bundle exec create_session $TDDIUM_SESSION_ID $SOLANO_DW_HOSTNAME $TDDIUM_REPO_ROOT $DW_API_AUTH_ID $DW_API_AUTH_SECRET -t $DW_API_TOKEN'_'$TDDIUM_SESSION_ID -d 30"
+  worker_setup: "bundle exec create_worker $TDDIUM_SESSION_ID $TDDIUM_TID $SOLANO_DW_HOSTNAME $DW_API_TOKEN'_'$TDDIUM_SESSION_ID"
+  post_worker: "bundle exec upload_jacoco_data $TDDIUM_SESSION_ID $TDDIUM_TID $SOLANO_DW_HOSTNAME $DW_API_TOKEN'_'$TDDIUM_SESSION_ID $TDDIUM_REPO_ROOT'/target/coverage-reports/jacoco-ut.exec' ; bundle exec upload_jacoco_data $TDDIUM_SESSION_ID $TDDIUM_TID $SOLANO_DW_HOSTNAME $DW_API_TOKEN'_'$TDDIUM_SESSION_ID $TDDIUM_REPO_ROOT'/target/coverage-reports/jacoco-it.exec'"
+  post_build: "bundle exec upload_jacoco_merged_data $TDDIUM_SESSION_ID $SOLANO_DW_HOSTNAME $DW_API_TOKEN'_'$TDDIUM_SESSION_ID $TDDIUM_REPO_ROOT/target/coverage-reports/jacoco-merged.exec  $TDDIUM_REPO_ROOT/target/spring-mvc-showcase-bin.zip $TDDIUM_REPO_ROOT/rendered_views/jacoco-merge/jacoco.xml"
+

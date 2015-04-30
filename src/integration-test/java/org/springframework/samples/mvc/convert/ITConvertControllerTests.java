@@ -16,7 +16,11 @@ import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.test.web.servlet.MockMvc;
 
-public class ConvertControllerTests {
+/**
+ * Direct copy of ConvertControllerTests.  Trying to get base integration tests
+ * so that we can generate multiple code-coverage results.
+ */
+public class ITConvertControllerTests {
 	
 	private MockMvc mockMvc;
 

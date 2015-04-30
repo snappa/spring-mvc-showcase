@@ -1,0 +1,19 @@
+GIT
+  remote: https://cacc665780b5a58a41a9d90dd8098a9de2457c1f:x-oauth-basic@github.com/solanolabs/dw-client.git
+  revision: 85b098bdd49897c49ffc47acf70a08e212ac8c17
+  specs:
+    dw-client (0.1.4)
+      nokogiri
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    mini_portile (0.6.2)
+    nokogiri (1.6.6.2)
+      mini_portile (~> 0.6.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  dw-client!
