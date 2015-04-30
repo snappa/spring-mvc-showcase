@@ -7,10 +7,8 @@
   </formats>
   <fileSets>
     <fileSet>
-      <!-- XXX: Need to be able to compute the directory portion so we get only the rendered resuults -->
-<!--      <directory>${project.build.directory}/rendered_views</directory>-->
+      <!-- XXX: Need to be able to compute the directory portion so we get only the rendered results as opposed to unnecessary intermediate directories. -->
       <directory>${basedir}/rendered_views</directory>
-<!--      <directory>${project.build.directory}/site/jacoco-ut</directory>-->
     </fileSet>
   </fileSets>
 </assembly>
